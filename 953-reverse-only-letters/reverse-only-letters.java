@@ -1,38 +1,27 @@
 class Solution {
     public String reverseOnlyLetters(String s) {
-        char[] result = new char[s.length()];
-        int l = 0;
-        int r = s.length() - 1;
-        
-        String letters = "abcdefghijklmnopqrstvuwxyz";
+            int l = 0;
+            int r = s.length() - 1;
+            char[] array = s.toCharArray();
 
+            while(l < r) {
+                if(Character.isLetter(array[l]) && Character.isLetter(array[r])){
+                    char temp = array[r];
+                    array[r] = array[l];
+                    array[l] = temp;
+                    l++;
+                    r--;
+                } 
 
-        while(l <= r) {
-
-            if(letters.contains(Character.toLowerCase(s.charAt(l)) +"") && 
-               letters.contains(Character.toLowerCase(s.charAt(r)) +"")) {
-                
-                result[r] = s.charAt(l);
-                result[l] = s.charAt(r);
-                l++;
-                r--;
-            } else {
-                if(!letters.contains(Character.toLowerCase(s.charAt(l)) +"")){
-                    result[l] = s.charAt(l);
+                if(!Character.isLetter(array[l])) {
                     l++;
                 }
 
-                if(!letters.contains(Character.toLowerCase(s.charAt(r)) +"")){
-                    result[r] =  s.charAt(r);
+                if(!Character.isLetter(array[r])) {
                     r--;
                 }
             }
 
-        }
-        
-
-
-
-        return new String(result);
-    }
+            return new String(array);      
+       }
 }
