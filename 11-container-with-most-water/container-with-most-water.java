@@ -4,15 +4,9 @@ class Solution {
         int ans = 0;
         int l = 0;
         int r = height.length -1;
-        int min = 0;
-        int temp = 0;
 
         while(l <= r) {
-            min = Math.min(height[l], height[r]);
-
-            temp = min * (r - l);
-
-            ans = Math.max(ans, temp);
+            ans = Math.max(ans, Math.min(height[l], height[r]) * (r - l));
             
             if(height[l] > height[r]){
                 r--;
