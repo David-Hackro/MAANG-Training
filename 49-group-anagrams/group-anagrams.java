@@ -10,9 +10,7 @@ class Solution {
             if(map.containsKey(sortedWord)) {
                 map.get(sortedWord).add(s);
             } else {
-                List t = new ArrayList<String>();
-                t.add(s);
-                map.put(sortedWord, t);
+                map.put(sortedWord, new ArrayList<>(Arrays.asList(s)));
             }
         }
 
