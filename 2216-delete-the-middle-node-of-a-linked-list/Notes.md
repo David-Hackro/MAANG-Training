@@ -1,1 +1,1 @@
-<h2>delete-the-middle-node-of-a-linked-list Notes</h2><hr>[ Time taken: 17 m 58 s ]
+<h2>delete-the-middle-node-of-a-linked-list Notes</h2><hr>[ Time taken: 16 m 28 s ]
