@@ -14,27 +14,26 @@
  * }
  */
 class Solution {
-    //[] 0
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        int acum = 0;
-
-        return isTargetValue(root, targetSum, acum);
+        if(root == null) {
+            return false;
+        }
+        return hasTargetValue(root, targetSum,  0);
     }
 
-    public boolean isTargetValue(TreeNode node, int targetSum, int acum) {
-
+    public boolean hasTargetValue(TreeNode node, int targetSum, int acum) {
+        
         if(node == null) {
             return false;
         }
-
-        acum += node.val;
         if(node.left == null && node.right == null) {
-            return acum == targetSum;
+            return acum + node.val == targetSum;
         }
 
-        boolean l = isTargetValue(node.left, targetSum, acum);
-        boolean r = isTargetValue(node.right, targetSum, acum);
+        boolean l = hasTargetValue(node.left, targetSum, acum + node.val);
+        boolean r = hasTargetValue(node.right, targetSum, acum + node.val);
 
         return l || r;
     }
+
 }
