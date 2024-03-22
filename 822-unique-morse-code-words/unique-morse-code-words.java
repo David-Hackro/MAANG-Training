@@ -1,6 +1,6 @@
 class Solution {
     public int uniqueMorseRepresentations(String[] words) {
-        HashMap<String, Boolean> map = new HashMap<>();
+        Set<String> map = new HashSet<>();
         StringBuilder sb;
         String[] letters = new String[]{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
 
@@ -11,7 +11,7 @@ class Solution {
                 sb.append(letters[(int) c - 'a']);
             }
 
-            map.put(sb.toString(), true);
+            map.add(sb.toString());
         }
 
         return map.size();
