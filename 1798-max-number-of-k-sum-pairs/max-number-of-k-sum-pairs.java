@@ -3,8 +3,9 @@ class Solution {
         int result = 0;
         int i = 0;
         int j = nums.length -1;
-        Arrays.sort(nums);
         int t = 0;
+
+        Arrays.sort(nums);
 
         while( i < j) {
         	t = nums[i] + nums[j];
