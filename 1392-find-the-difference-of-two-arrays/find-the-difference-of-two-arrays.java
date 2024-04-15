@@ -5,13 +5,18 @@ class Solution {
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();
         List<List<Integer>> result = new ArrayList<>();
+        int i = 0;
 
-        for (int num : nums1) {
-            set1.add(num);
-        }
+        while(i < Math.max(nums1.length, nums2.length)) {
+            if(i < nums1.length) {
+                set1.add(nums1[i]);
+            } 
 
-        for (int num : nums2) {
-            set2.add(num);
+            if(i < nums2.length) {
+                set2.add(nums2[i]);
+            }
+
+            i++;
         }
 
         Iterator<Integer> iterator1 = set1.iterator();
