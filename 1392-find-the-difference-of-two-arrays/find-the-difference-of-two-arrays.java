@@ -29,11 +29,9 @@ class Solution {
             }
         }
 
-        List<Integer> s1 = new ArrayList<>(set1);
-        List<Integer> s2 = new ArrayList<>(set2);
 
-        result.add(s1);
-        result.add(s2);
+        result.add( new ArrayList<Integer>(set1));
+        result.add(new ArrayList<Integer>(set2));
 
         return result;
     }
