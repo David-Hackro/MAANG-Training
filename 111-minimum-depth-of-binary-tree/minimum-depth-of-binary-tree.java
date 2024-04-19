@@ -15,39 +15,25 @@
  */
 class Solution {
     public int minDepth(TreeNode root) {
-        if(root == null) {
+        if(root == null) { // base case - when is a leaf
             return 0;
         }
 
-        return getMinPath(root, 0, Integer.MAX_VALUE);
-    }
-
-    private int getMinPath(TreeNode node, int counter, int min) {
-        
-        if(counter > min) {
-            return min;
-        }
-        
-        if(node == null) {
-            return min;
+        if(root.left == null && root.right == null) {
+            return 1;
         }
 
-        counter++;
+        int l = minDepth(root.left);
+        int r = minDepth(root.right);
 
-        if(node.left == null && node.right == null) {
-            return Math.min(min, counter);
+        if(l == 0) {
+            return r +1;
         }
 
-        int left = getMinPath(node.left, counter, min);
-        int right = getMinPath(node.right, counter, min);
-        
-        return Math.min(left, right);
+        if(r == 0) {
+            return l + 1;
+        }
+    
+        return Math.min(l,r) + 1;
     }
 }
-
-
-
-
-
-
-
