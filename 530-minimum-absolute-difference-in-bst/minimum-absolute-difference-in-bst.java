@@ -14,36 +14,27 @@
  * }
  */
 class Solution {
+    TreeNode prev;
+    int min = Integer.MAX_VALUE;
+
+    private void getMinAbsDiff(TreeNode node) {
+        if(node == null) {
+            return;
+        }
+
+        getMinAbsDiff(node.left);
+
+        if(prev != null) {
+            min = Math.min(min, node.val - prev.val);
+        }
+        prev = node;
+
+        getMinAbsDiff(node.right);
+    }
+
     public int getMinimumDifference(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        int result = Integer.MAX_VALUE;
+        getMinAbsDiff(root);
 
-        while(!queue.isEmpty()) {
-            int size = queue.size();
-            for(int i = 0; i < size; i++) {
-                TreeNode node = queue.remove();
-                list.add(node.val);
-
-                if(node.left != null) {
-                    queue.add(node.left);
-                }
-
-                if(node.right != null) {
-                    queue.add(node.right);
-                }
-            }
-        }
-
-        Collections.sort(list);
-
-        for(int i = 1; i < list.size(); i++) {
-            result = Math.min(result, list.get(i) - list.get(i -1));
-        }
-
-
-        return result;
+        return min;
     }
 }
-
