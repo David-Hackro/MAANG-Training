@@ -19,20 +19,13 @@ class Solution {
             return new TreeNode(val);
         }       
 
-        TreeNode l = root.left;
-        TreeNode r = root.right;
-
-
         if(root.val > val) {
-          l = insertIntoBST(root.left, val);
+          root.left = insertIntoBST(root.left, val);
         } 
         
         if(root.val < val) {
-            r = insertIntoBST(root.right, val);
+            root.right = insertIntoBST(root.right, val);
         }
-
-        root.left = l;
-        root.right = r;
 
         return root;
     }
