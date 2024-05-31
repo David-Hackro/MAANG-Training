@@ -28,8 +28,8 @@ class Solution {
         if(node == null) return;
 
         smallest(node.left);
-        k--;
-        if(k == 0) {
+    
+        if(--k == 0) {
             n = node.val;
             return;
         }
