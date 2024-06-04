@@ -15,25 +15,35 @@
  */
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        if(root == null) {
-            return false;
-        }
-        return hasTargetValue(root, targetSum,  0);
+        
+        return hasPathSum(root, targetSum, 0);
     }
 
-    public boolean hasTargetValue(TreeNode node, int targetSum, int acum) {
-        
+    public boolean hasPathSum(TreeNode node, int targetSum, int prefix) {
         if(node == null) {
             return false;
         }
+
+        prefix += node.val;
+
         if(node.left == null && node.right == null) {
-            return acum + node.val == targetSum;
+            return prefix == targetSum;
         }
 
-        boolean l = hasTargetValue(node.left, targetSum, acum + node.val);
-        boolean r = hasTargetValue(node.right, targetSum, acum + node.val);
+        boolean l = hasPathSum(node.left, targetSum, prefix);
+        boolean r = hasPathSum(node.right, targetSum, prefix);
 
         return l || r;
     }
 
+
 }
+
+
+
+
+
+
+
+
+
