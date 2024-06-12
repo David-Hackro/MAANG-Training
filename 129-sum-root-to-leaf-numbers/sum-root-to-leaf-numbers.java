@@ -24,14 +24,14 @@ class Solution {
               return 0;
           }
 
-          int t = val * 10 + node.val;
+          int result = val * 10 + node.val;
 
           if(node.left == null && node.right == null) {
-              return t;
+              return result;
           }
 
-          int l = getResult(node.left, t);
-          int r = getResult(node.right, t);
+          int l = getResult(node.left, result);
+          int r = getResult(node.right, result);
 
           return l + r;
     }
