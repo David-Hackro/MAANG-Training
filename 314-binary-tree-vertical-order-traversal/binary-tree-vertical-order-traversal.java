@@ -15,14 +15,13 @@
  */
 class Solution {
     public List<List<Integer>> verticalOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
         List<Integer> temp = new ArrayList<>();
         HashMap<Integer, List<Integer>> map = new HashMap<>();
         Queue<Integer> levels = new LinkedList<>();
         Queue<TreeNode> queue = new LinkedList<>();
 
         if(root == null) {
-            return result;
+            return new ArrayList<>();
         }
 
         queue.add(root);
@@ -58,8 +57,6 @@ class Solution {
 
         Map<Integer, List<Integer>> treeMap = new TreeMap<>(map);
 
-        result = new ArrayList<List<Integer>>(treeMap.values());
-
-        return result; 
+        return new ArrayList<List<Integer>>(treeMap.values()); 
     }
 }
