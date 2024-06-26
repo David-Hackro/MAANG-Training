@@ -32,7 +32,6 @@ class Solution {
     
         while(!queue.isEmpty()) {
             int size = queue.size();
-            temp = new ArrayList<>();
 
             for(int i = 0; i < size; i++) {
                 TreeNode n = queue.remove();
@@ -59,8 +58,8 @@ class Solution {
 
         Map<Integer, List<Integer>> treeMap = new TreeMap<>(map);
 
-        List<List<Integer>> list = new ArrayList<List<Integer>>(treeMap.values());
+        result = new ArrayList<List<Integer>>(treeMap.values());
 
-        return list; 
+        return result; 
     }
 }
