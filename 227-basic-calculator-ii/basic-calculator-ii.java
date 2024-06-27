@@ -42,12 +42,10 @@ class Solution {
         result = values.pollFirst();
 
         while(!values.isEmpty()) {
-            if(operators.peekFirst() == '+') {
-                result += values.pollFirst();
-            } else {
-                result -= values.pollFirst();
-            }
-            operators.pollFirst();
+            char op = operators.pollLast();
+            int prev = values.pollLast();
+    
+            result = op == '+' ? result + prev : result - prev;
         }
 
         return result;
