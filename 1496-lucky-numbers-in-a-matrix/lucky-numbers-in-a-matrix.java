@@ -7,19 +7,12 @@ class Solution {
         List<Integer> results = new ArrayList<>();
 
         for(int i = 0; i < rows; i++) {
-            //elemento mínimo en su fila y máximo en su columna.
             
-
             for(int j = 0; j < cols; j++) {
                 
-                if(max[j] == 0) {
-                    max[j] = Integer.MIN_VALUE;
-                }
-
-                if(min[i] == 0) {
-                    min[i] = Integer.MAX_VALUE;
-                }
-
+                if(max[j] == 0) max[j] = Integer.MIN_VALUE;
+                if(min[i] == 0) min[i] = Integer.MAX_VALUE;
+                
                 min[i] = Math.min(matrix[i][j], min[i]);
                 max[j] = Math.max(matrix[i][j], max[j]);
             }
