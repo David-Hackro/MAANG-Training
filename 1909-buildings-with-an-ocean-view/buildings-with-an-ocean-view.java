@@ -1,22 +1,21 @@
 class Solution {
     public int[] findBuildings(int[] heights) {
-        Stack<Integer> stack = new Stack<>();
-        int i = 0;
         int[] result;
+        Stack<Integer> stack = new Stack<>();
 
-        for(int n: heights) {
-
-            while(!stack.isEmpty() && heights[stack.peek()] <= n) {
+        for(int i = 0; i < heights.length; i++){
+            
+            while(!stack.isEmpty() && heights[i] >= heights[stack.peek()]){
                 stack.pop();
             }
 
-            stack.push(i++);
-        }       
+            stack.push(i);
+        }
 
         result = new int[stack.size()];
-        i = stack.size() - 1;
-        while(!stack.isEmpty()) {
-            result[i--] = stack.pop();
+
+        for (int i = result.length -1; i>=0; i--) {
+            result[i] = stack.pop();
         }
 
         return result;
