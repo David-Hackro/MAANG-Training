@@ -26,9 +26,7 @@ class Solution {
     private void dfs(List<Integer> list, int counter, TreeNode node, int targetSum) {
         if(node == null) {
             return;
-        }
-        
-        
+        }        
 
         List<Integer> listNew = new ArrayList<>();
         listNew.addAll(list);
