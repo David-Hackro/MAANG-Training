@@ -4,12 +4,9 @@ class Solution {
 
     public int countComponents(int n, int[][] edges) {
          int counter = 0;
-         int max = 0;
          for(int[] a: edges) {
             int x = a[0];
             int y = a[1];
-            max = Math.max(max, x);
-            max = Math.max(max, y);
 
             if(!map.containsKey(x)){
                map.put(x, new ArrayList<>());
