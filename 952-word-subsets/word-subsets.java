@@ -1,39 +1,41 @@
 class Solution {
     public List<String> wordSubsets(String[] words1, String[] words2) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        HashMap<Character, Integer> map2 = new HashMap<>();
-        HashMap<Character, Integer> temp;
+        int[] frecuency = new int[26];
+        int[] temp;
+
         List<String> result = new ArrayList<>();
 
         for(String s: words2) {
-            temp = new HashMap<>();
+            temp = new int[26];
 
             for(char c: s.toCharArray()) {
-                temp.put(c, temp.getOrDefault(c, 0) + 1);
+                temp[c - 'a'] ++;
 
-                if(!map.containsKey(c)) {
-                    map.put(c, 1);
-                } else if(map.get(c) < temp.get(c)) {
-                    map.put(c, temp.get(c));
-                }
+                frecuency[c - 'a'] = Math.max(frecuency[c - 'a'], temp[c - 'a']);
             }
         }
 
 
         for(String s: words1) {
-            temp = new HashMap<>();
-            map2 = new HashMap<>(map);
-
-             
+            
+            temp = new int[26];
+            boolean flag = true;
+            
             for(char c: s.toCharArray()) {
-                temp.put(c, temp.getOrDefault(c, 0) + 1);
+                temp[c - 'a']++;
+            }
 
-                if(map2.containsKey(c) && map2.get(c) <= temp.get(c)) {
-                    map2.remove(c);
+            for(int i = 0; i < 26; i++) {
+                
+                if(temp[i] < frecuency[i]) {
+                    flag = false;
+                    break;
                 }
             }
 
-            if(map2.isEmpty()) {
+
+
+            if(flag) {
                 result.add(s);
             }
         }
