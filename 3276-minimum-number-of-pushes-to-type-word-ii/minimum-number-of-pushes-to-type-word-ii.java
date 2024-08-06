@@ -1,30 +1,26 @@
 class Solution {
     public int minimumPushes(String word) {
-     int result = 0;
-     int i = 0;
-     HashMap<Character, Integer> map = new HashMap<>();
+        int result = 0;
+        int[] count = new int[26];
 
-     for(char c: word.toCharArray()) {
-        map.put(c, map.getOrDefault(c, 0) + 1);
-     }
-
-     List<Integer> list = new ArrayList<>(map.values());
-     Collections.sort(list, Collections.reverseOrder());
-
-     for(int n: list) {
-        if(i < 8) {
-            result += n;
-        } else if(i < 16){
-            result += (n * 2);
-        } else if(i < 24){
-            result += (n * 3);
-        } else {
-            result += (n * 4);
+        for (char c : word.toCharArray()) {
+            count[c - 'a']++;
         }
 
-        i++;
-     }
+        Arrays.sort(count);
 
-     return result;   
+        for (int i = 25, j = 0; i >= 0; i--, j++) {
+            if (j < 8) {
+                result += count[i];
+            } else if (j < 16) {
+                result += (count[i] * 2);
+            } else if (j < 24) {
+                result += (count[i] * 3);
+            } else {
+                result += (count[i] * 4);
+            }
+        }
+
+        return result;
     }
 }
