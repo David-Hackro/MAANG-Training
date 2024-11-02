@@ -1,11 +1,11 @@
 class Solution {
     public int lastStoneWeight(int[] stones) {
-        PriorityQueue<Integer> heap = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
         int result = 0;
 
 
         for(int stone: stones) {
-            heap.add(stone);
+            heap.add(stone * -1);
         }
 
         while(heap.size() > 1) {
@@ -14,10 +14,10 @@ class Solution {
 
             if(stoneOne != stoneTwo) {
                 int newStone = Math.abs(stoneOne - stoneTwo);
-                heap.add(newStone);
+                heap.add(newStone * -1);
             }
         }
 
-        return heap.isEmpty()?0:heap.peek();
+        return heap.isEmpty()?0:Math.abs(heap.peek());
     }
 }
