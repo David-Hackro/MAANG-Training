@@ -1,12 +1,12 @@
 class Solution {
     public int halveArray(int[] nums) {
-        PriorityQueue<Double> heap = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Double> heap = new PriorityQueue<>();
         int result = 0;
         double total = 0;
         double subtotal = 0;
 
         for(int n: nums) {
-            heap.add(n + 0.0);
+            heap.add((n + 0.0 ) * -1);
 
             total += n;
         }
@@ -14,9 +14,9 @@ class Solution {
         subtotal = total;
 
         while(!heap.isEmpty() && subtotal > (total / 2)) {
-            double n = heap.remove() / 2;
+            double n = Math.abs(heap.remove() / 2);
             subtotal -= n;
-            heap.add(n);
+            heap.add(n * -1);
             result++;
         }
 
