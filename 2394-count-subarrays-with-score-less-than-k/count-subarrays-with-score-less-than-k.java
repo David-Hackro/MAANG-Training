@@ -4,22 +4,18 @@ class Solution {
         int r = 0;
         long counter = 0;
         long acumulator = 0;
-        long calculus = 0l; // sum numbers and multiply by the lenght
 
         for (; r < nums.length; r++) {
 
-            acumulator += nums[r];// 5
-            calculus = acumulator * (r - l + 1);
+            acumulator += nums[r];
 
-            while (calculus >= k && l <= r) {
-                acumulator -= nums[l];
-                l++;
-                calculus = acumulator * (r - l + 1);
+            while (acumulator * (r - l + 1) >= k) {
+                acumulator -= nums[l++];
             }
 
             counter += (r - l + 1);
         }
 
-        return Long.valueOf(counter);
+        return counter;
     }
 }
