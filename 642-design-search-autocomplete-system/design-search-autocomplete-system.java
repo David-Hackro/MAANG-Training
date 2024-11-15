@@ -23,7 +23,6 @@ class AutocompleteSystem {
             mapByText.put(sb.toString(), mapByText.getOrDefault(sb.toString(), 0) + 1);
             words = getHotSentences();
             sb.setLength(0);
-            // recalculate the hot sentences
             return result;
         }
 
