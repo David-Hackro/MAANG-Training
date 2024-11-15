@@ -19,37 +19,15 @@ class Solution {
         List<Interval> list = new ArrayList<>();
         List<Interval> heap = new ArrayList<>();
 
-        /*
-         * PriorityQueue<Interval> heap = new PriorityQueue<>((a, b) -> {
-         * int r = Integer.compare(a.start, b.start);
-         * 
-         * if (r != 0) { // when is != 0 are diff
-         * return r;
-         * }
-         * 
-         * return Integer.compare(a.end, b.end);
-         * }
-         * 
-         * );
-         */
-
         for (List<Interval> l : schedule) {
             for (Interval interval : l) {
                 heap.add(interval);
             }
         }
-        Collections.sort(heap, new Comparator<Interval>() {
-            public int compare(Interval a, Interval b) {
-                int r = Integer.compare(a.start, b.start);
 
-                if (r != 0) { // when is != 0 are diff
-                    return r;
-                }
+        Collections.sort(heap, (a,b) -> Integer.compare(a.start, b.start));
 
-                return Integer.compare(a.end, b.end);
-            }
-        });
-
+        
         Interval prev; // remove the firt (low) item
         Interval current;
         while (heap.size() > 1) {
