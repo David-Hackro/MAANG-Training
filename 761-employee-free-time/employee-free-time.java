@@ -17,32 +17,31 @@ class Interval {
 class Solution {
     public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
         List<Interval> list = new ArrayList<>();
-        List<Interval> heap = new ArrayList<>();
+        List<Interval> sortedList = new ArrayList<>();
 
         for (List<Interval> l : schedule) {
             for (Interval interval : l) {
-                heap.add(interval);
+                sortedList.add(interval);
             }
         }
 
-        Collections.sort(heap, (a,b) -> Integer.compare(a.start, b.start));
+        Collections.sort(sortedList, (a,b) -> Integer.compare(a.start, b.start));
+        //[5,21],[45,56],[57,74],[89,96]
 
+        Interval first = sortedList.remove(0); 
+        int start = first.start;//5
+        int end = first.end;//21
         
-        Interval prev; // remove the firt (low) item
-        Interval current;
-        while (heap.size() > 1) {
-            prev = heap.remove(0);// [1,3]
-            current = heap.remove(0);// [2,4]
-
-            // if end is greather that start to the next
-            if (prev.end > current.start) { // the current element is inside the prev element
-                heap.add(0, new Interval(prev.start, Math.max(prev.end, current.end)));
-            } else { // we found a common space
-                if (prev.end != current.start) {
-                    list.add(new Interval(prev.end, current.start));
-                }
-
-                heap.add(0, current);
+    
+        while (!sortedList.isEmpty()) {   
+            Interval current = sortedList.remove(0);
+            //[4,10]
+            if(current.start <=  end) { // is inside the range
+                end = Math.max(end, current.end);//10
+            } else {
+                list.add(new Interval(end, current.start));
+                start = current.start;
+                end = current.end;
             }
         }
 
