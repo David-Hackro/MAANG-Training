@@ -1,35 +1,18 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
-        HashMap<Integer, Double> map = new HashMap<>();
-        int j = 0;
-        int x = 0;
         int[][] result = new int[k][2];
 
-        for (int[] p : points) {
-            double euclideanDistance = (p[0] * p[0]) + (p[1] * p[1]);
-            map.put(j, euclideanDistance);
-            j++;
-        }
+        Arrays.sort(points, (a, b) ->  euclideanDistance(a) - euclideanDistance(b));
 
-        PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>(
-                (n1, n2) -> Double.compare(map.get(n1), map.get(n2)));
-
-        for (int i = 0; i < points.length; i++) {
-            minHeap.add(i);
-        }
-
-        while (!minHeap.isEmpty()) {
-            int pos = minHeap.remove();
-
-            if (x < k) {
-                result[x] = points[pos];
-                x++;
-            } else {
-                return result;
-            }
-
+        for(int i = 0;i<k;i++)
+        {
+            result[i] = points[i];
         }
 
         return result;
+    }
+
+    private int euclideanDistance(int[] array) {
+        return (array[0] * array[0]) + (array[1] * array[1]);
     }
 }
