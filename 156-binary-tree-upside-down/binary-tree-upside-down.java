@@ -37,14 +37,14 @@ class Solution {
             return;
         }
 
-        updateTree(current, current.left);//null
+        updateTree(current, current.left);
         
         if(parent == null) {
             return;
         }
 
-        current.right = parent;//1 - r - > (1)
-        current.left = parent.right;//2 - l -> (3)
+        current.right = parent;
+        current.left = parent.right;
         parent.left = null;
         parent.right = null;
     }
