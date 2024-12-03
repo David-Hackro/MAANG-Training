@@ -1,19 +1,19 @@
 class Solution {
     public String addSpaces(String s, int[] spaces) {
-        StringBuilder sb = new StringBuilder();
-        int i = 0; //spaces
+        char[] result = new char[s.length() + spaces.length];
+        int i = 0; 
+        int j = 0;
 
-        //s = "icodeinpython", spaces = [1,5,7,9]
-        for(int index = 0; index < s.length(); index++) {
-            
-            if(i <  spaces.length && spaces[i] == index) {
-                sb.append(" ");
+        for (int index = 0; index < s.length(); index++) {
+
+            if (i < spaces.length && spaces[i] == index) {
+                result[j++] = ' ';
                 i++;
             }
 
-            sb.append(s.charAt(index)); //i
+            result[j++] = s.charAt(index);
         }
 
-        return sb.toString();
-        }
+        return new String(result);
+    }
 }
