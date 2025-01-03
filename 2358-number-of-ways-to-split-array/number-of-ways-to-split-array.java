@@ -1,18 +1,20 @@
 class Solution {
     public int waysToSplitArray(int[] nums) {
-        long total = 0;
-        long prefix = 0;
-        int counter = 0;
+        int result = 0;
+        long[] copy = new long[nums.length];
+        copy[0] = nums[0];
 
-        for(int n: nums) {
-            total+=n;
+        for (int i = 1; i < nums.length; i++) {        
+            copy[i] = nums[i] + copy[i - 1];
         }
 
-        for(int i = 0; i < nums.length -1; i++) {
-            prefix+=nums[i];
-            counter += prefix>= total - prefix?1:0;
+        for (int i = 0;i < copy.length -1; i++) {
+
+            if ((copy[copy.length - 1] - copy[i]) <= copy[i]) {
+                result++;
+            }
         }
 
-        return counter;
+        return result;
     }
 }
