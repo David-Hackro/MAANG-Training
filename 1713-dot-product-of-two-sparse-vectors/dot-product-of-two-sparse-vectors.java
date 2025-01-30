@@ -14,12 +14,22 @@ class SparseVector {
 
     // Return the dotProduct of two sparse vectors
     public int dotProduct(SparseVector vec) {
-        HashMap<Integer, Integer> map2 = vec.map;
-        int result = 0;
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+        HashMap<Integer, Integer> longMap;
+        HashMap<Integer, Integer> shortMap;
 
-            if (map2.containsKey(entry.getKey())) {// if exist in both maps
-                result = result + (entry.getValue() * map2.get(entry.getKey()));
+        if(map.size() > vec.map.size()) {
+            longMap = map;
+            shortMap = vec.map;
+        } else {
+            longMap = vec.map;
+            shortMap = map;
+        }
+
+        int result = 0;
+        for (Map.Entry<Integer, Integer> entry : shortMap.entrySet()) {
+
+            if (longMap.containsKey(entry.getKey())) {// if exist in both maps
+                result = result + (entry.getValue() * longMap.get(entry.getKey()));
             }
         }
 
