@@ -13,7 +13,7 @@ class Solution {
             res = prefix % k;
 
             //verify if prev appeared another equal res
-            if((map.containsKey(res) && i - map.get(res) >= 2) || res == 0 && i > 0) {
+            if(res == 0 && i > 0 || (map.containsKey(res) && i - map.get(res) >= 2)) {
                 return true;
             } else if(!map.containsKey(res)) {//where is the first time that appear
                 map.put(res, i);
