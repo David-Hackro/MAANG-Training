@@ -17,10 +17,7 @@ class Solution {
             maxDoubles--;
         }
 
-
-        if(current > 0) {
-            result+= (current -1);
-        }
+        result+= (current -1);
 
         return result;
 
