@@ -4,20 +4,40 @@ class Solution {
         int index = 0;
         HashMap<Integer, Integer> map = new HashMap<>();
         
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(
-            (a,b) -> map.get(b).compareTo(map.get(a))
-        );
+        //key (index == freq) - list with the numbers
+        HashMap<Integer, HashSet<Integer>> indices = new HashMap<>();
+        
 
+        //nums = [1,2]
+        //k    = 2
         for(int n: nums) {
+            //1:1
+
+            //[0,2]
             map.put(n, map.getOrDefault(n, 0) + 1);
-        }
 
-        for(Integer key: map.keySet()) {
-            maxHeap.add(key);
-        }
+            //array in the indice (freq) = number(key)
+            
+            if(!indices.containsKey(map.get(n))) {
+                indices.put(map.get(n), new HashSet<Integer>());
+            }
 
-        for(; k > 0; k--) {
-            result[index++] = maxHeap.remove();
+            indices.get(map.get(n)).add(n);
+        }
+        HashSet<Integer> uniques = new HashSet<>();
+        List<Integer> keys = new ArrayList<>(indices.keySet());
+        Collections.sort(keys);
+
+
+        for(int j = keys.size() -1; j >= 0 && index < k; j--) {
+            
+            for(int m : indices.get(keys.get(j))) {
+                if(index < k && !uniques.contains(m)) {
+                    result[index++] = m;
+                }
+
+                uniques.add(m);
+            }
         }
 
         return result;
