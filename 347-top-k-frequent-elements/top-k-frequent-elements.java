@@ -6,10 +6,7 @@ class Solution {
         
         //key (index == freq) - list with the numbers
         HashMap<Integer, HashSet<Integer>> indices = new HashMap<>();
-        
 
-        //nums = [1,2]
-        //k    = 2
         for(int n: nums) {
             //1:1
 
@@ -24,22 +21,20 @@ class Solution {
 
             indices.get(map.get(n)).add(n);
         }
-        HashSet<Integer> uniques = new HashSet<>();
-        List<Integer> keys = new ArrayList<>(indices.keySet());
-        Collections.sort(keys);
+        HashSet<Integer> set = new HashSet<>();
 
-
-        for(int j = keys.size() -1; j >= 0 && index < k; j--) {
+        //map = 3
+        for(int i = indices.size(); i > 0 && index <= k; i--) {
             
-            for(int m : indices.get(keys.get(j))) {
-                if(index < k && !uniques.contains(m)) {
-                    result[index++] = m;
+            for(int n: indices.get(i)) {
+                if(!set.contains(n) && index < k) {
+                    result[index++] = n;
                 }
 
-                uniques.add(m);
+                set.add(n);
             }
         }
-
+        
         return result;
     }
 }
