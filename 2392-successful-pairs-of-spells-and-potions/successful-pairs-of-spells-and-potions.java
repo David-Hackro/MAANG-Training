@@ -22,10 +22,13 @@ class Solution {
                 return result;
             }
 
-            int position = map.get(spell).get(0);
-            map.get(spell).remove(0);
-
-            result[position] = numbers;
+            result[map.get(spell).get(0)] = numbers;
+        
+            if(map.get(spell).size() == 1) {
+                map.remove(spell);
+            } else {
+                map.get(spell).remove(0);
+            }
         }
 
         return result;
