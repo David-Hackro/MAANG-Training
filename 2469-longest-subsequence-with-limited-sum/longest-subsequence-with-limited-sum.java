@@ -27,9 +27,7 @@ class Solution {
 
         while(l <= r) {
             m = (l + r) / 2;
-            //10
-            //1,3,7,12
-            //     l,r
+          
             if(prefix[m] == query) {
                 return m + 1;
             }
