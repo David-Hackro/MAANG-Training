@@ -1,13 +1,7 @@
 class Solution {
-
     int[][] directions;
 
     public int minimumEffortPath(int[][] heights) {
-        int l = 0;
-        int r = 0;// get the max value in the matrix
-        int m = (l + r) / 2;
-        int result = 0;
-
         directions = new int[][] {
                 // r,c
                 { 0, 1 }, // right
@@ -15,64 +9,74 @@ class Solution {
                 { 0, -1 }, // left
                 { -1, 0 },// up
         };
+        int m = heights.length;
+        int n = heights[0].length;
+        int l = 0;
+        int r = 0;
 
-        // get the max value in the matrix
+        if (m == 1 && n == 1) {
+            return 0;
+        }
+
         for (int[] row : heights) {
-            for (int c : row) {
-                r = Math.max(r, c);
+            for (int col : row) {
+                r = Math.max(r, col);
             }
         }
+        int res = 0;
 
         while (l <= r) {
-            // calculate the media
-            m = (l + r) / 2;// 4
-            boolean isValidPathWithTheMedia = dfs(heights, 0, 0, m, new HashSet<String>());
+            int media = (l + r) / 2;
 
-            // when is true, means that found a path with this abs difference
-            if (isValidPathWithTheMedia) {
-                r = m - 1;
-                result = m;
+            if (bfs(heights, media)) {
+                r = media - 1;
             } else {
-                l = m + 1;
+                l = media + 1;
             }
         }
 
-        return result;
+        if (l < r) {
+            return -1;
+        }
+
+        return l;
     }
 
-    private boolean dfs(int[][] heights, int row, int col, int m, HashSet<String> seen) {
+    private boolean bfs(int[][] heights, int media) {
+        int m = heights.length;
+        int n = heights[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        boolean[][] seen = new boolean[m][n];
+        queue.add(new int[] { 0, 0 });
+        seen[0][0] = true;
 
-        if (seen.contains(row + "," + col)) {
-            return false;
-        }
+        while (!queue.isEmpty()) {
+            int[] item = queue.remove();
+            int itemRow = item[0];
+            int itemCol = item[1];
 
-        seen.add(row + "," + col);
+            // validate directions
+            for (int[] dir : directions) {
+                int nr = itemRow + dir[0];
+                int nc = itemCol + dir[1];
 
-        for (int[] dir : directions) {// right,bottom,left,up
-            int nr = row + dir[0];
-            int nc = col + dir[1];
+                if (isValid(nr, nc, m, n) && !seen[nr][nc]
+                        && Math.abs(heights[itemRow][itemCol] - heights[nr][nc]) <= media) {
 
-            if (!isValid(nr, nc, heights)) {
-                continue;
-            }
+                    if (nr == m - 1 && nc == n - 1) {
+                        return true;
+                    }
 
-            int abs = Math.abs(heights[row][col] - heights[nr][nc]);
-            boolean isPosiblePath = abs <= m;
-            boolean isTargetCell = nr == heights.length - 1 && nc == heights[0].length - 1;
-
-            if(isTargetCell) {
-                return isPosiblePath;
-            } 
-
-            if (isPosiblePath && dfs(heights, nr, nc, m, seen)) {
-                return true;
+                    seen[nr][nc] = true;
+                    queue.add(new int[] { nr, nc });
+                }
             }
         }
 
         return false;
     }
 
-    private boolean isValid(int row, int col, int[][] heights) {
-        return row >= 0 && row < heights.length && col >= 0 && col < heights[0].length;
+    private boolean isValid(int r, int c, int m, int n) {
+        return r >= 0 && r < m && c >= 0 && c < n;
     }
 }
