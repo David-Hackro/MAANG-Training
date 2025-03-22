@@ -52,6 +52,8 @@ class Solution {
                 suppliesSet.add(key);
                 it.remove();
                 flag = true;
+
+                return flag;
             }
 
         }
