@@ -24,37 +24,31 @@ class Solution {
             return Integer.compare(lengthB, lengthA);
         });
 
-        // [[0,4],[0,3],[0,2],[0,1],[1,4],[1,3],[2,6],[2,5],[3,4],[4,7],[4,5],[5,7],[5,6],[6,9],[6,8],[6,7]]
-
         while (pointer < time && i < clips.length) {
             boolean flag = false;
             // search the first element that the finish value is greather
             // that my current pointer
 
             int max = i;// this is an indice
-            while (i < clips.length) {
 
-                if (clips[i][0] <= pointer) {
-                    if (clips[i][1] > pointer) {
+            while (i < clips.length && clips[i][0] <= pointer) {
 
-                        if (clips[i][1] - pointer + 1 >= clips[max][1] - pointer + 1) {
-                            max = i;
-                        }
-                        flag = true;
+                if (clips[i][1] > pointer) {
+
+                    if (clips[i][1] - pointer + 1 >= clips[max][1] - pointer + 1) {
+                        max = i;
                     }
-                    i++;
-                } else {
-                    i++;
-                    break;
+                    flag = true;
                 }
-
+                i++;
             }
 
             if (flag) {
                 System.out.println(clips[max][0] + "," + clips[max][1]);
                 counter++;
-                i--;
                 pointer = clips[max][1];
+            } else {
+                 i++;
             }
         }
 
