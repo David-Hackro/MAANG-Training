@@ -25,7 +25,6 @@ class Solution {
 
         while (!maxHeap.isEmpty() && maxHeap.peek().getValue() > turns) {
             Map.Entry<Integer, Integer> monster = maxHeap.remove();
-            map.remove(monster.getKey());
             monsters++;
             turns++;
         }
