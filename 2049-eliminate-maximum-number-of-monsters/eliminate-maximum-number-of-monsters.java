@@ -18,7 +18,7 @@ class Solution {
             index++;
         }
 
-        if (monsters != dist.length) {
+        if (index != dist.length) {
             return monsters;
         }
 
