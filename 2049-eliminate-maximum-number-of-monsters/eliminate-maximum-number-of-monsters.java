@@ -1,7 +1,6 @@
 class Solution {
     public int eliminateMaximum(int[] dist, int[] speed) {
         int turns = 0;
-        int monsters = 0;
         int index  = 0;
 
         for (int i = 0; i < dist.length; i++) {
@@ -13,13 +12,12 @@ class Solution {
         Arrays.sort(dist);
 
         while (index < dist.length && dist[index] > turns) {
-            monsters++;
             turns++;
             index++;
         }
 
         if (index != dist.length) {
-            return monsters;
+            return turns;
         }
 
         return dist.length;
