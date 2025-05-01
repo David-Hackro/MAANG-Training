@@ -34,20 +34,17 @@ class Solution {
 
         while (!queue.isEmpty()) {
 
-            if(level == k) {
-                while(!queue.isEmpty()) {
-                    result.add(queue.remove().val);
-                }
-            } 
+
+            while(level == k &&!queue.isEmpty()) {
+                result.add(queue.remove().val);
+            }
 
             int size = queue.size();
-
     
             for (int i = 0; i < size; i++) {
                 node = queue.remove();
                 seen.add(node.val);
                 HashSet<TreeNode> children = map.get(node);
-
 
                 for (TreeNode c : children) {
                     
