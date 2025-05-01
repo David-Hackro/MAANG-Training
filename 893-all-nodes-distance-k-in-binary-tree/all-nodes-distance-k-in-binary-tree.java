@@ -34,12 +34,14 @@ class Solution {
 
         while (!queue.isEmpty()) {
 
-
-            while(level == k &&!queue.isEmpty()) {
-                result.add(queue.remove().val);
-            }
+            if(level == k) {
+                while(!queue.isEmpty()) {
+                    result.add(queue.remove().val);
+                }
+            } 
 
             int size = queue.size();
+
     
             for (int i = 0; i < size; i++) {
                 node = queue.remove();
