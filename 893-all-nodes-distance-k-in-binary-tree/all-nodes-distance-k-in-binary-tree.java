@@ -48,6 +48,7 @@ class Solution {
                 seen.add(node.val);
                 HashSet<TreeNode> children = map.get(node);
 
+
                 for (TreeNode c : children) {
                     
                      if (!seen.contains(c.val)) {
